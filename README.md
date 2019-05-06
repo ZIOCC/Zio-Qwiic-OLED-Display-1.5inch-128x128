@@ -1,4 +1,4 @@
-# Zio Qwiic OLED Display 1.5inch 128x128
+# Zio Qwiic OLED Display 1.5inch (128 x 128 pixels)
 
 ![](oled1-5.png)
 
