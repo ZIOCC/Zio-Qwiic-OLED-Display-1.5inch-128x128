@@ -8,7 +8,7 @@
 
 #### Description
 
-When you want to display more content, [Qwiic 0.91inch display](https://www.smart-prototyping.com/Zio-OLED-Display-0-91-in-128-32-Qwiic.html) would not suffice. Here is the Qwiic 1.5inch 128 x 128 pixels OLED display module. Comparing to the Qwiic 0.91inch display, it can display more lines (max. 16 lines) of text content, and display picture and animation better, this is super exciting! 
+When you want to display more content, [Qwiic 0.91inch display](https://www.smart-prototyping.com/Zio-OLED-Display-0-91-in-128-32-Qwiic.html) would not suffice. Here is the Qwiic 1.5inch 128 x 128 pixels OLED display module. Compared to the Qwiic 0.91inch display, it can display more lines (max. 16 lines) of text content, and display picture and animation better, this is super exciting! 
 
 On the backside, there are  two Qwiic connectors, Qwiic connectors means it is an I2C device, so that you can just use [Qwiic cables](https://www.smart-prototyping.com/zio-cables) to quickly connect it to the other modules, with no soldering! 
 
