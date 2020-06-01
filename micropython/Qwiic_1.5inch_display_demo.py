@@ -1,41 +1,8 @@
 from machine import Pin,I2C
 import ssd1327
 
-
-i2c = I2C(sda=Pin("Y8"), scl=Pin("Y6"))
-display = ssd1327.SSD1327_I2C(128, 128, i2c)
-
-# Unlock
-display.write_cmd(0xFD)
-display.write_cmd(0x12)
-#
-# # Display off
-# display.write_cmd(0xAE)
-
-# Set column address 0-127
-display.write_cmd(0x15)
-display.write_cmd(0x00) # was 0x08 on 96x96 ((128-width)/depth)=8
-display.write_cmd(0x7F) # was 0x37 on 96x96 (63-((128-width)/depth))=55
-
-# Set row address 0-127
-display.write_cmd(0x75)
-display.write_cmd(0x00)
-display.write_cmd(0x7F) # was 0x5F on 96x96 (height-1=95)
-
-# Set start line = 0
-display.write_cmd(0xA1)
-display.write_cmd(0x00)
-
-# Display offset = 0
-display.write_cmd(0xA2)
-display.write_cmd(0x00) # was 0x20 on 96x96 (128-height=32)
-
-# Display normal
-display.write_cmd(0xA4)
-
-# Set multiplex ratio
-display.write_cmd(0xA8)
-display.write_cmd(0x7F) # was 0x5F on 96x96 (height-1=95)
+i2c = I2C(sda=Pin("Y10"), scl=Pin("Y9"))
+display = ssd1327.QWIIC_128X128_OLED(i2c)
 
 # Test
 display.fill(0)
