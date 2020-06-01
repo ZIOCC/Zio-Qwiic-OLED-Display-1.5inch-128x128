@@ -23,6 +23,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+"""
+ssd1327 library for Qwiic 1.5 inch 128x128 OLED display, 
+Rewrite by mcauser, https://github.com/mcauser/micropython-ssd1327
+Collected by Alex Chu, https://github.com/ZIOCC/Zio-Qwiic-OLED-Display-1.5inch-128x128/blob/master/micropython/ssd1327.py
+product link: https://www.smart-prototyping.com/Zio-Qwiic-OLED-Display-1_5inch-128x128
+"""
+
 
 from micropython import const
 import time
@@ -187,3 +194,42 @@ class SEEED_OLED_96X96(SSD1327_I2C):
         self.write_cmd(SET_GRAYSCALE_TABLE)
         for i in range(0,15):
             self.write_cmd(table[i])
+
+            
+class QWIIC_128X128_OLED(SSD1327_I2C):
+    def __init__(self, i2c):
+        super().__init__(128, 128, i2c)
+        self.changesetting()
+
+    def changesetting(self):
+        # Unlock
+        self.write_cmd(0xFD)
+        self.write_cmd(0x12)
+        #
+        # # Display off
+        # display.write_cmd(0xAE)
+
+        # Set column address 0-127
+        self.write_cmd(0x15)
+        self.write_cmd(0x00)  # was 0x08 on 96x96 ((128-width)/depth)=8
+        self.write_cmd(0x7F)  # was 0x37 on 96x96 (63-((128-width)/depth))=55
+
+        # Set row address 0-127
+        self.write_cmd(0x75)
+        self.write_cmd(0x00)
+        self.write_cmd(0x7F)  # was 0x5F on 96x96 (height-1=95)
+
+        # Set start line = 0
+        self.write_cmd(0xA1)
+        self.write_cmd(0x00)
+
+        # Display offset = 0
+        self.write_cmd(0xA2)
+        self.write_cmd(0x00)  # was 0x20 on 96x96 (128-height=32)
+
+        # Display normal
+        self.write_cmd(0xA4)
+
+        # Set multiplex ratio
+        self.write_cmd(0xA8)
+        self.write_cmd(0x7F)  # was 0x5F on 96x96 (height-1=95)
